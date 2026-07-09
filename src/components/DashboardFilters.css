@@ -1,0 +1,207 @@
+/* ── DashboardFilters.css ──────────────────────────────────────────────────────
+   Left sidebar: search input + collapsible filter sections.
+   Matches Desktop-5 in the Figma: purple panel, pink accordion buttons,
+   checkboxes visible when expanded.
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* ── Sidebar panel ─────────────────────────────────────────────────────────── */
+
+.dashboard-filters {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  /* sticky: the sidebar stays in view as the user scrolls down the table.
+     top: 1rem means it stops 1rem from the top of the viewport. */
+  position: sticky;
+  top: 1rem;
+  height: calc(100vh - 2rem); /* never taller than the viewport */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ── Search section ────────────────────────────────────────────────────────── */
+
+.dashboard-filters__search-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.dashboard-filters__search-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+.dashboard-filters__search-input {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-md);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  width: 100%;
+  transition: border-color 0.15s;
+}
+
+.dashboard-filters__search-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.dashboard-filters__search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* ── "Filter by" divider label ─────────────────────────────────────────────── */
+
+.dashboard-filters__filter-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ── One collapsible filter section ───────────────────────────────────────── */
+
+.filter-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The accordion header button — full-width, pink pill */
+.filter-section__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+  background-color: var(--color-accent);
+  color: var(--color-text);
+  border: none;
+  /* pill shape when closed, flat bottom when open (overridden below) */
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  text-align: left;
+}
+
+/* When open: slightly darker background, flat bottom so it connects to the body */
+.filter-section__header--open {
+  background-color: var(--color-accent-hover);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  /* border-radius shorthand goes: top-left top-right bottom-right bottom-left
+     So this = rounded top, sharp bottom — connects visually to the open body */
+}
+
+.filter-section__header:hover:not(.filter-section__header--open) {
+  background-color: var(--color-accent-hover);
+}
+
+/* The ▸/▾ arrow — pushed to the far right with margin-left: auto */
+.filter-section__chevron {
+  margin-left: auto;
+  font-size: 0.8rem;
+  /* flex-shrink: 0 prevents the arrow from being squished if the label is long */
+  flex-shrink: 0;
+}
+
+/* Active filter count badge (the little number pill) */
+.filter-section__count {
+  background-color: var(--color-bg);
+  color: var(--color-accent-light);
+  border-radius: var(--radius-pill);
+  padding: 1px var(--space-xs);
+  font-size: 0.7rem;
+  font-weight: bold;
+  min-width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* The dropdown body — only rendered when section is open */
+.filter-section__body {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* One checkbox row */
+.filter-section__option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  padding: var(--space-xs) 0;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.1s;
+}
+
+.filter-section__option:hover {
+  background-color: var(--color-surface);
+  padding-left: var(--space-xs);
+}
+
+/* accent-color sets the fill color of the checkbox's checkmark.
+   It only works in modern browsers but that covers 95%+ of users. */
+.filter-section__checkbox {
+  accent-color: var(--color-accent);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.filter-section__option-text {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.filter-section__option:hover .filter-section__option-text {
+  color: var(--color-text);
+}
+
+.filter-section__empty {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: var(--space-xs) 0;
+}
+
+/* ── Clear all button ──────────────────────────────────────────────────────── */
+
+.dashboard-filters__clear {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-muted);
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: var(--space-xs) var(--space-md);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  margin-top: var(--space-xs);
+  text-align: center;
+}
+
+.dashboard-filters__clear:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}

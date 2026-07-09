@@ -1,0 +1,60 @@
+/* ── global.css ───────────────────────────────────────────────────────────────
+   Shared design tokens for the dashboard.
+
+   COLOR CHANGES from the Discover app:
+   The Figma for the dashboard uses a purple/mauve palette, not the dark red
+   one from the Discover app. The tokens below match what's in Desktop-5:
+   - Deep purple background instead of dark red
+   - Bright pink/magenta accent instead of coral red
+   - Light lavender text instead of warm cream
+   ────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Colors ───────────────────────────────────────────────────────────── */
+  --color-bg:           #1a0a2e;   /* very dark purple — page background */
+  --color-surface:      #2d1b4e;   /* slightly lighter purple — cards, sidebar */
+  --color-surface-alt:  #3d2060;   /* used for table header, slightly lighter */
+  --color-accent:       #c0447a;   /* bright pink/magenta — buttons, highlights */
+  --color-accent-hover: #a33366;   /* darker pink for hover states */
+  --color-accent-light: #e8709a;   /* lighter pink — used for column header text */
+  --color-title:        #d070c0;   /* purple-pink for the dashboard title */
+  --color-text:         #f0e8f8;   /* very light lavender — main text */
+  --color-text-muted:   #9880b0;   /* muted purple — secondary text */
+  --color-border:       #4a2870;   /* subtle purple border */
+  --color-row-hover:    #3a2258;   /* slightly lighter than surface for row hover */
+
+  /* ── Spacing ──────────────────────────────────────────────────────────── */
+  --space-xs: 0.25rem;   /*  4px */
+  --space-sm: 0.5rem;    /*  8px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+
+  /* ── Shape ────────────────────────────────────────────────────────────── */
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-pill: 999px;
+}
+
+/* ── Base reset ───────────────────────────────────────────────────────────── */
+/* box-sizing: border-box makes padding/border count INSIDE the width,
+   not add on top of it. Without this, a div with width:200px and padding:16px
+   would actually be 232px wide — confusing and hard to reason about.
+   With border-box it stays 200px total. This is universally applied here
+   via the * selector (means "every element"). */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.5;
+  margin: 0 auto;
+  width: 100vw;
+  min-height: 100vh;
+  align-items: center;
+}

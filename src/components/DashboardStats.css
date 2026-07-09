@@ -1,0 +1,48 @@
+/* ── DashboardStats.css ────────────────────────────────────────────────────────
+   Four stat cards displayed as a flex row above the table.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.dashboard-stats {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.dashboard-stats__card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  /* padding shorthand: var(--space-md) top/bottom, var(--space-lg) left/right */
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  /* flex: 1 makes all cards grow equally to fill the row.
+     If there are 4 cards and total width is 1200px, each gets ~300px. */
+  flex: 1;
+  min-width: 160px;
+  border: 1px solid var(--color-border);
+}
+
+/* The big number (e.g. "87") */
+.dashboard-stats__number {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: var(--color-accent-light);
+  line-height: 1;
+}
+
+/* Text stats (culture name, medium) — smaller because words are longer */
+.dashboard-stats__number--text {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-top: var(--space-xs);
+}
+
+/* The small uppercase label under the number */
+.dashboard-stats__label {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}

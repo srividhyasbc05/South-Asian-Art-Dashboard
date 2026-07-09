@@ -1,0 +1,129 @@
+/* ── ArtworkOverlay.css ────────────────────────────────────────────────────────
+   Full-screen modal. Image on the left, metadata on the right.
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Dark backdrop covering the full viewport.
+   position: fixed + inset: 0 is the standard way to do a full-screen overlay.
+   inset: 0 is shorthand for top: 0; right: 0; bottom: 0; left: 0.
+   z-index: 1000 puts it on top of everything else on the page. */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 0, 20, 0.82); /* very dark purple-black, semi-transparent */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+}
+
+/* The content panel — two halves side by side */
+.overlay__panel {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  width: 100%;
+  max-width: 920px;
+  max-height: 88vh;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Close button — absolute positioned in the top-right corner of the panel */
+.overlay__close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 1.8rem;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 1; /* sits above both halves so it's always clickable */
+  transition: color 0.15s;
+}
+
+.overlay__close:hover {
+  color: var(--color-text);
+}
+
+/* Left half: image */
+.overlay__image-side {
+  flex: 1;
+  background-color: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.overlay__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.overlay__image-placeholder {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* Right half: metadata */
+.overlay__info-side {
+  flex: 1;
+  padding: var(--space-xl);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  border-left: 1px solid var(--color-border);
+}
+
+.overlay__title {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  color: var(--color-text);
+  padding-right: var(--space-xl); /* prevent text running under the × button */
+}
+
+/* <dl> = definition list — semantically correct for label/value pairs.
+   <dt> = definition term (the label like "Artist")
+   <dd> = definition description (the value like "Raja Ravi Varma")
+   We use grid here to align all labels in one column, all values in another. */
+.overlay__metadata {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  /* auto = label column is as wide as the widest label
+     1fr  = value column fills the rest */
+  gap: var(--space-sm) var(--space-lg);
+  align-items: baseline;
+}
+
+.overlay__meta-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.overlay__meta-value {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  margin: 0; /* <dd> has browser default margin — reset it */
+}
+
+.overlay__source-link {
+  color: var(--color-accent-light);
+  font-size: 0.9rem;
+  text-underline-offset: 3px;
+  margin-top: auto; /* pushes the link to the bottom of the flex column */
+  transition: color 0.15s;
+}
+
+.overlay__source-link:hover {
+  color: var(--color-text);
+}
