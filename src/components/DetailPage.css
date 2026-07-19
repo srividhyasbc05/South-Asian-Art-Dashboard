@@ -1,0 +1,203 @@
+/* ── DetailPage.css ──────────────────────────────────────────────────────────
+   Responsive layout: portrait images stack vertically, landscape go side by side.
+   Matches the two detail page variants shown in your mockup.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.detail-page {
+  padding: var(--space-md) var(--space-xl) var(--space-xl);
+}
+
+.detail-page--loading,
+.detail-page--error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  gap: var(--space-lg);
+  color: var(--color-text-muted);
+}
+
+.detail-page__spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--color-surface);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Panel ───────────────────────────────────────────────────────────────────
+   The main content container. Layout switches based on modifier class.    */
+
+.detail-page__panel {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* LANDSCAPE: image left (~55%), info right — matches left detail mockup */
+.detail-page--landscape .detail-page__panel {
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  min-height: 500px;
+}
+
+/* PORTRAIT / SQUARE: image top, info below — matches right detail mockup */
+.detail-page--portrait .detail-page__panel {
+  display: flex;
+  flex-direction: column;
+  max-width: 680px;
+}
+
+/* ── Image side ──────────────────────────────────────────────────────────── */
+
+.detail-page__image-side {
+  background-color: #f5f0e8;   /* warm off-white — matches mockup image bg */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.detail-page--landscape .detail-page__image-side {
+  min-height: 500px;
+}
+
+.detail-page--portrait .detail-page__image-side {
+  max-height: 480px;
+}
+
+.detail-page__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.detail-page__image-placeholder {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+/* ── Info side ───────────────────────────────────────────────────────────── */
+
+.detail-page__info-side {
+  background-color: #1a0a0a;   /* very dark, matching dark panel in mockup */
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.detail-page--landscape .detail-page__info-side {
+  overflow-y: auto;
+  max-height: 500px;
+}
+
+.detail-page__title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--color-text);
+  line-height: 1.25;
+}
+
+/* ── Tags ────────────────────────────────────────────────────────────────── */
+
+.detail-page__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* ── Metadata intro text ─────────────────────────────────────────────────── */
+
+.detail-page__meta-intro {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ── Metadata table ──────────────────────────────────────────────────────── */
+
+.detail-page__meta-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.detail-page__meta-label {
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+  padding: var(--space-xs) var(--space-md) var(--space-xs) 0;
+  vertical-align: top;
+  white-space: nowrap;
+  width: 90px;
+}
+
+.detail-page__meta-value {
+  color: var(--color-text);
+  padding: var(--space-xs) 0;
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.detail-page__meta-table tr {
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ── Description ─────────────────────────────────────────────────────────── */
+
+.detail-page__description {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.detail-page__description p { margin-bottom: var(--space-xs); }
+.detail-page__description a { color: var(--color-accent); }
+
+/* ── Actions ─────────────────────────────────────────────────────────────── */
+
+.detail-page__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: var(--space-sm);
+}
+
+.detail-page__source-link {
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  text-underline-offset: 3px;
+  transition: color 0.15s;
+}
+
+.detail-page__source-link:hover { color: var(--color-text); }
+
+.detail-page__download {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-lg);
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-left: auto;
+}
+
+.detail-page__download:hover { background-color: var(--color-accent-hover); }

@@ -4,7 +4,7 @@ import { fetchAllArtworks, computeStats } from './api/fetchAll.js';   // Fix 1: 
 import DashboardStats   from './components/DashboardStats.jsx';
 import DashboardFilters from './components/DashboardFilters.jsx';
 import DashboardRow     from './components/DashboardRow.jsx';
-import ArtworkOverlay   from './components/ArtworkOverlay.jsx';
+import ChartSection     from './components/Chart.jsx';
 import './App.css';
 import './global.css';
 
@@ -215,14 +215,13 @@ const DashboardPage = () => {
 
       {/* Overlay — sits on top of everything. ArtworkOverlay renders nothing
           when artwork prop is null, so this is always safe to include. */}
-      <ArtworkOverlay
-        artwork={selectedArtwork}
-        onClose={() => setSelectedArtwork(null)}
-      />
+      
 
       <h1 className="dashboard-page__title">Public Domain Indian Art Dashboard</h1>
 
       <DashboardStats stats={stats} filteredCount={filteredList.length} />
+      <ChartSection artworks={masterList} />
+
 
       <div className="dashboard-page__body">
 

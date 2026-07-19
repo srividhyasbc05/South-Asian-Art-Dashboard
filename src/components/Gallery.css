@@ -1,0 +1,95 @@
+/* ── Gallery.css ──────────────────────────────────────────────────────────────
+   Styles the right sidebar gallery panel and its thumbnail cards.
+
+   THE SIZING FIX:
+   Same root cause as the main ArtworkDisplay image issue — without a fixed
+   height on the image container, each <img>'s rendered size depends on its
+   own natural pixel dimensions and the column's current width, so thumbnails
+   end up wildly inconsistent sizes (some huge, some tiny) depending on what
+   resolution image the museum API happened to return.
+
+   Fix: every thumbnail card gets the SAME fixed height. object-fit: cover
+   (not contain) is used here deliberately — for small thumbnails, cropping
+   slightly to fill a uniform box looks better than letterboxing each one
+   at a different visual scale.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.gallery {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  position: sticky;
+  top: var(--space-xl);
+  max-height: 80vh;     /* panel itself won't grow taller than 80% of viewport */
+  overflow-y: auto;     /* scrolls internally once content exceeds max-height */
+}
+
+.gallery__title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--color-accent);
+  margin-bottom: var(--space-xs);
+}
+
+.gallery__hint,
+.gallery__empty {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.gallery__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.gallery__card {
+  background-color: var(--color-bg);
+  border-radius: var(--radius-sm);
+  overflow: hidden;     /* clips the image to the card's rounded corners */
+  border: 1px solid var(--color-border);
+}
+
+/* The FIXED-SIZE frame for every thumbnail — this is the actual fix.
+   Every card's image area is exactly 140px tall, no matter what the
+   source image's native resolution is. */
+.gallery__card-image {
+  width: 100%;
+  height: 140px;
+  /* object-fit: cover fills the box edge-to-edge, cropping overflow.
+     This is different from ArtworkDisplay's "contain" — at thumbnail
+     size, a slight crop reads better than a tiny letterboxed image
+     surrounded by empty space. */
+  object-fit: cover;
+  display: block; /* removes the small gap under inline images */
+}
+
+/* Placeholder shown when an artwork has no image at all */
+.gallery__card-no-image {
+  width: 100%;
+  height: 140px;
+  background-color: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.gallery__card-title {
+  padding: var(--space-xs) var(--space-sm) 0;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  /* Clamp text to 2 lines max with an ellipsis, so long titles
+     don't blow out the fixed card height */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gallery__card-museum {
+  padding: 0 var(--space-sm) var(--space-sm);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}

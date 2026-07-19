@@ -1,78 +1,84 @@
 /* ── DashboardRow.css ──────────────────────────────────────────────────────────
-   One table row. Interactive: click opens the overlay.
-
-   THE HOVER PROBLEM ON DARK BACKGROUNDS:
-   The original hover color was var(--color-surface), which is nearly the same
-   as the table's background. On a dark purple table you need a clearly lighter
-   hover color so the user can see which row they're on.
+   Styles one row in the dashboard table.
+   The <tr> itself is the interactive element — it gets a hover highlight.
    ────────────────────────────────────────────────────────────────────────── */
 
 .dashboard-row {
   cursor: pointer;
   border-bottom: 1px solid var(--color-border);
-  /* transition on background-color makes the hover feel smooth instead of jarring */
   transition: background-color 0.15s;
 }
 
 .dashboard-row:hover {
-  background-color: var(--color-row-hover); /* noticeably lighter than the table bg */
+  background-color: var(--color-surface);
 }
 
-/* Focus ring for keyboard navigation.
-   :focus-visible = only show the ring when the user navigated here by keyboard.
-   Regular mouse clicks don't trigger it, so mouse users don't see an ugly box. */
+/* Focus ring for keyboard navigation — :focus-visible only shows
+   the ring when navigating by keyboard, not on mouse click */
 .dashboard-row:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: -2px;
 }
 
-/* ── Cells ─────────────────────────────────────────────────────────────────── */
-
+/* All cells share base padding and vertical alignment */
 .dashboard-row__cell {
   padding: var(--space-sm) var(--space-md);
-  vertical-align: middle; /* centers content vertically within the cell */
-  font-size: 0.88rem;
+  vertical-align: middle;
+  font-size: 0.9rem;
   color: var(--color-text);
 }
 
+/* Image cell — fixed narrow width so it doesn't stretch */
 .dashboard-row__cell--image {
-  width: 76px;
-  padding: var(--space-xs) var(--space-sm);
+  width: 72px;
+  padding: var(--space-xs);
 }
 
+/* Title cell — given more visual weight */
 .dashboard-row__cell--title {
   font-weight: 600;
-  max-width: 280px;
-  color: var(--color-text);
+  max-width: 240px;
 }
 
+/* Medium cell — can be long text, allow wrapping */
 .dashboard-row__cell--medium {
-  max-width: 200px;
+  max-width: 180px;
   color: var(--color-text-muted);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
 }
 
-/* ── Thumbnail ─────────────────────────────────────────────────────────────── */
-
+/* Thumbnail image — fixed square crop */
 .dashboard-row__thumbnail {
-  width: 64px;
-  height: 64px;
-  object-fit: cover;
+  width: 60px;
+  height: 60px;
+  object-fit: cover; /* crop to fill — thumbnails should be uniform */
   border-radius: var(--radius-sm);
   display: block;
-  /* A subtle border makes the thumbnail feel like a proper image card */
-  border: 1px solid var(--color-border);
 }
 
+/* Placeholder when no image / image failed to load */
 .dashboard-row__thumbnail-placeholder {
-  width: 64px;
-  height: 64px;
-  background-color: var(--color-surface-alt);
+  width: 60px;
+  height: 60px;
+  background-color: var(--color-surface);
   border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-text-muted);
   font-size: 1.2rem;
+}
+
+/* Link inside title cell */
+.dashboard-row__link {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s;
+}
+
+.dashboard-row__link:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

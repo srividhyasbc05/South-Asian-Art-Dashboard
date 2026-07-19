@@ -1,0 +1,73 @@
+
+
+.chart-section {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-lg);
+
+  /* These two together are the responsiveness fix:
+     width: 100% — fill the parent column completely
+     min-width: 0 — allow shrinking below content size inside a grid cell
+     Without min-width: 0, a grid item refuses to shrink below its content's
+     natural width, which makes the chart overflow its column. */
+  width: 100%;
+  min-width: 0;
+
+  /* DO NOT add overflow: hidden here — it clips the Recharts SVG */
+}
+
+/* ── Header row: "Charts" label + tab buttons ──────────────────────────────── */
+
+.chart-section__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.chart-section__label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* Tab button row */
+.chart-section__tabs {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.chart-section__tab {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-muted);
+  font-family: inherit;
+  font-size: 0.8rem;
+  padding: var(--space-xs) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.chart-section__tab:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+/* Active tab — filled background so it's clearly selected */
+.chart-section__tab--active {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.chart-section__tab--active:hover {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}

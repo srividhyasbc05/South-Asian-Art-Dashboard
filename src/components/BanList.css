@@ -1,0 +1,76 @@
+/* ── BanList.css ──────────────────────────────────────────────────────────────
+   Styles the left sidebar ban list panel.
+   Items are pills; clicking one (via onRemove in BanList.jsx) unbans it.
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* ── Panel container ───────────────────────────────────────────────────────── */
+
+.ban-list {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  /* sticky keeps the panel in view as the page scrolls.
+     top: var(--space-xl) means it stops 2rem from the top of the viewport. */
+  position: sticky;
+  top: var(--space-xl);
+}
+
+/* ── Heading ───────────────────────────────────────────────────────────────── */
+
+.ban-list__title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: var(--space-sm);
+  color: var(--color-accent);
+}
+
+/* ── Helper text ───────────────────────────────────────────────────────────── */
+
+.ban-list__empty,
+.ban-list__hint {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+  line-height: 1.4;
+}
+
+/* ── List of banned items ──────────────────────────────────────────────────── */
+
+.ban-list__items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+.ban-list__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background-color: var(--color-banned);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+  font-size: 0.85rem;
+  /* word-break ensures long attribute values wrap instead of overflowing */
+  word-break: break-word;
+  transition: background-color 0.15s;
+}
+
+.ban-list__item:hover {
+  background-color: var(--color-accent);
+  cursor: pointer;
+}
+
+/* The × icon before each banned value */
+.ban-list__remove-icon {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--color-accent);
+  flex-shrink: 0; /* don't let the icon compress if text is long */
+}
+
+.ban-list__item:hover .ban-list__remove-icon {
+  color: var(--color-text);
+}

@@ -1,0 +1,33 @@
+/* ── Layout.css ──────────────────────────────────────────────────────────────
+   Wraps detail pages. Provides the back button navigation bar at the top.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.layout {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+}
+
+.layout__nav {
+  padding: var(--space-md) var(--space-xl);
+}
+
+/* Back button — a circular pink arrow matching your mockup */
+.layout__back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background-color: var(--color-accent);
+  color: var(--color-text);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: background-color 0.15s, transform 0.1s;
+  font-weight: bold;
+}
+
+.layout__back-btn:hover {
+  background-color: var(--color-accent-hover);
+  transform: translateX(-2px);
+}

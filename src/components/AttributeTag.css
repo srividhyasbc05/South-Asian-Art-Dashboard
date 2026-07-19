@@ -1,0 +1,42 @@
+ 
+.attribute-tag {
+  display: flex;
+  flex-direction: column;  /* label stacked above value */
+  align-items: flex-start;
+  background-color: var(--color-accent);
+  border-radius: var(--radius-pill);
+  padding: var(--space-xs) var(--space-md);
+  cursor: pointer;
+  border: 2px solid transparent; /* holds space so layout doesn't shift when border appears */
+  transition: background-color 0.15s, transform 0.1s;
+  white-space: nowrap;    /* keep label + value on one line within the pill */
+  flex-shrink: 0;         /* don't compress pills — let them wrap to next line instead */
+  /* NO margin here — parent's gap handles spacing */
+}
+ 
+.attribute-tag:hover {
+  background-color: var(--color-accent-hover);
+  transform: translateY(-1px);
+}
+ 
+.attribute-tag--banned {
+  background-color: var(--color-banned);
+  border-color: var(--color-accent);
+}
+ 
+.attribute-tag--banned:hover {
+  background-color: var(--color-accent);
+}
+ 
+.attribute-tag__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+}
+ 
+.attribute-tag__value {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+ 
